@@ -1,11 +1,12 @@
 .cell{
 	display: inline-block;
-	margin-top: -4px;
 	border: 1px solid gray;
 	position: absolute;
 }
 .snake{
 	background-color: green;
+	position: absolute;	
+	border: 1px solid gray;
 }
 #btn{
 	position: relative;
