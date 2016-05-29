@@ -4,7 +4,12 @@
 	position: absolute;
 }
 .snake{
-	background-color: green;
+	background-color: #afc;
+	position: absolute;	
+	border: 1px solid gray;
+}
+.food{
+	background-color: #fcc;
 	position: absolute;	
 	border: 1px solid gray;
 }

@@ -9,45 +9,72 @@ document.addEventListener("DOMContentLoaded",function(){
 			}
 		},
 		ready:function(){
-			var intervalId = setInterval(this.step,100);			
+			var intervalId = setInterval(this.step,100);
 		},
 		methods:{
 			step:function(){
 				var self=this;
 				if(!this.enable){return};
 				this.coordX+=this.dirX;
-				this.coordY+=this.dirY;				
+				this.coordY+=this.dirY;	
 				this.body=_.rest(this.body);
 				if(_.some(this.body, function(item){
 					self.coordX==item.x;
-					self.coordY==item.y;					
+					self.coordY==item.y;
 					return self.coordX==item.x&&self.coordY==item.y;
 				})){
-					alert('qwe');
+					alert('Game over');
+					this.enable=false;
 				};
-				if (_.some(this.body,function(){
-					self.coordX==self.mapHeight;
-					self.coordY==self.mapWidth;
-					return self.coordX==self.mapHeight||self.coordY==self.mapHeight;})
+				if (self.coordX==self.mapWidth
+					||self.coordY==self.mapHeight
 					||self.coordX<0
-					||self.coorY<0
+					||self.coordY<0
 				) {
-					alert('cvbhn');
+					alert('Game over');
+					this.enable=false;
 				};
 				this.body.push({
 					x:this.coordX,
 					y:this.coordY
-				});	
+				});
 			}
-		},		
+		},
 		template:'<div class="snake" v-for="cell in body" :style="{width:cellSize.toString()+\'px\',height:cellSize.toString()+\'px\',left:(cell.x*20).toString()+\'px\', top:(cell.y*20).toString()+\'px\'}"></div>',
 		props:['dirX','dirY','enable','cellSize','mapHeight','mapWidth']
+	});
+
+	Vue.component('food',{
+		data:function(){
+			return{
+				spot:[],
+				eated:false
+			}
+		},
+		ready:function(){
+			this.spot.push({
+				foodX:Math.floor(Math.random()*39)+1,
+				foodY:Math.floor(Math.random()*29)+1
+			})
+		},
+		methods:{
+			eaten:function(){
+				if (this.eated){
+					this.spot.push({
+						foodX:Math.floor(Math.random()*39)+1,
+						foodY:Math.floor(Math.random()*29)+1
+					})
+				}
+			}
+		},
+		template:'<div class="food" v-for="cell in spot" :style="{width:cellSize.toString()+\'px\',height:cellSize.toString()+\'px\',left:(cell.foodX*20).toString()+\'px\', top:(cell.foodY*20).toString()+\'px\'}"></div>',
+		props:['cellSize','mapHeight','mapWidth']
 	});
 
 	new Vue({
 		el:'#game',
 		data: function(){
-			return{				
+			return{	
 				dirX:1,
 				dirY:0,
 				cellSize:20,
@@ -55,13 +82,13 @@ document.addEventListener("DOMContentLoaded",function(){
 				intervalId:null,
 				step:20,
 				enable:false,
-				mapWidth:30,
-				mapHeight:40
+				mapWidth:40,
+				mapHeight:30
 			}
 		},
 		ready:function(){
-			for (var x = 1; x <= this.mapHeight; x++) {
-				for (var y = 1; y <= this.mapWidth; y++) {
+			for (var y = 1; y <= this.mapHeight; y++) {
+				for (var x = 1; x <= this.mapWidth; x++) {
 					this.field.push({
 						id:"cell "+x+" "+y,
 						x:(x-1),

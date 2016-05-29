@@ -18,8 +18,10 @@
 
 		<snake :dir-x="dirX" :dir-y="dirY" :cell-size="cellSize" :enable="enable" 
 		:map-height="mapHeight" :map-width="mapWidth">
-
 		</snake>
+
+		<food :cell-size="cellSize" :map-height="mapHeight" :map-width="mapWidth">
+		</food>
 
 		<div>
 			<button id="btn" v-on:click="start" :style="{top:(cellSize*30+10).toString()+'px'}">Начать</button>
