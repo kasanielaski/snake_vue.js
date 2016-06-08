@@ -16,15 +16,20 @@
 		v-for="cells in field" id="{{cells.id}}">			
 		</div>
 
-		<snake :dir-x="dirX" :dir-y="dirY" :cell-size="cellSize" :enable="enable" 
-		:map-height="mapHeight" :map-width="mapWidth">
-		</snake>
+		<div class="snake" :style="{width:cellSize.toString()+'px', height:cellSize.toString()+'px',
+		left:(cell.x*20).toString()+'px', top:(cell.y*20).toString()+'px'}" v-for="cell in snakeBody">
+		</div>
 
-		<food :cell-size="cellSize" :map-height="mapHeight" :map-width="mapWidth">
-		</food>
+		<div class="food" :style="{width:cellSize.toString()+'px', height:cellSize.toString()+'px',
+		left:(foodX*20).toString()+'px', top:(foodY*20).toString()+'px'}">			
+		</div>
 
-		<div>
-			<button id="btn" v-on:click="start" :style="{top:(cellSize*30+10).toString()+'px'}">Начать</button>
+		<div id="btn" :style="{top:(cellSize*30+10).toString()+'px'}">
+			<button v-on:click="start">Начать</button>
+		</div>
+
+		<div id="score" :style="{top:(cellSize*30+10).toString()+'px'}">
+			<p>Ваш счет: {{score}}</p>
 		</div>
 	</div>
 </body>
