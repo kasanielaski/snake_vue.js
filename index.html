@@ -12,16 +12,16 @@
 		v-on:keyup.left="left" v-on:keyup.right="right">
 
 		<div class="cell" :style="{width:cellSize.toString()+'px',height:cellSize.toString()+'px',
-		left:(cells.x*20).toString()+'px', top:(cells.y*20).toString()+'px'}"
-		v-for="cells in field" id="{{cells.id}}">			
+		left:(cells.x*cellSize).toString()+'px', top:(cells.y*cellSize).toString()+'px'}"
+		v-for="cells in field">			
 		</div>
 
 		<div class="snake" :style="{width:cellSize.toString()+'px', height:cellSize.toString()+'px',
-		left:(cell.x*20).toString()+'px', top:(cell.y*20).toString()+'px'}" v-for="cell in snakeBody">
+		left:(cell.x*cellSize).toString()+'px', top:(cell.y*cellSize).toString()+'px'}" v-for="cell in snakeBody">
 		</div>
 
 		<div class="food" :style="{width:cellSize.toString()+'px', height:cellSize.toString()+'px',
-		left:(foodX*20).toString()+'px', top:(foodY*20).toString()+'px'}">			
+		left:(foodX*cellSize).toString()+'px', top:(foodY*cellSize).toString()+'px'}">			
 		</div>
 
 		<div id="btn" :style="{top:(cellSize*30+10).toString()+'px'}">

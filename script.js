@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded",function(){
 				cellSize:20,
 				field:[],
 				intervalId:null,
-				step:20,
 				enable:false,
 				mapWidth:40,
 				mapHeight:30,
@@ -22,12 +21,11 @@ document.addEventListener("DOMContentLoaded",function(){
 		},
 		ready:function(){
 			//создание анимации
-			var intervalId = setInterval(this.gameStart,110);
+			this.intervalId = setInterval(this.gameStart,110);
 			//генерация поля
 			for (var y = 1; y <= this.mapHeight; y++) {
 				for (var x = 1; x <= this.mapWidth; x++) {
 					this.field.push({
-						id:"cell "+x+" "+y,
 						x:(x-1),
 						y:(y-1)
 					})
