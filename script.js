@@ -59,20 +59,20 @@ document.addEventListener("DOMContentLoaded",function(){
 				this.coordY+=this.dirY;	
 				this.snakeBody=_.rest(this.snakeBody);
 				if(_.some(this.snakeBody, function(item){
-					self.coordX==item.x;
-					self.coordY==item.y;
 					return self.coordX==item.x&&self.coordY==item.y;
 				})){
+					this.enable=false;					
 					alert('Game over');
-					this.enable=false;
+					return;
 				};
 				if(this.coordX==this.mapWidth
 					||this.coordY==this.mapHeight
 					||this.coordX<0
 					||this.coordY<0
 				) {
-					alert('Game over');
 					this.enable=false;
+					alert('Game over');
+					return;
 				};
 				if(this.coordX==this.foodX&&this.coordY==this.foodY){
 					this.score+=1;
