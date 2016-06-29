@@ -34,23 +34,40 @@ document.addEventListener("DOMContentLoaded",function(){
 		},
 		methods:{
 			down:function(){
+				if(this.dirX==0 && this.dirY==-1){return}
 				this.dirX=0;
 				this.dirY=1;
 			},
 			up:function(){
+				if(this.dirX==0 && this.dirY==1){return}
 				this.dirX=0;
 				this.dirY=-1;
 			},
 			left:function(){
+				if(this.dirX==1 && this.dirY==0){return}
 				this.dirX=-1;
 				this.dirY=0;
 			},
 			right:function(){
+				if(this.dirX==-1 && this.dirY==0){return}
 				this.dirX=1;
 				this.dirY=0;
 			},
-			start:function(){
+			start:function(){				
+				this.intervalId=null;
 				this.enable=true;
+			},
+			reset:function(){
+				this.enable=false;				
+				this.dirX=1;
+				this.dirY=0;
+				this.score=0;
+				this.coordX=3;
+				this.coordY=0;
+				this.snakeBody=[];
+				this.snakeBody=[{x:0,y:0},{x:1,y:0},{x:2,y:0},{x:3,y:0}];
+				this.foodX=Math.floor(Math.random()*39)+1;
+				this.foodY=Math.floor(Math.random()*29)+1;
 			},
 			gameStart:function(){
 				var self=this;
@@ -63,6 +80,7 @@ document.addEventListener("DOMContentLoaded",function(){
 				})){
 					this.enable=false;					
 					alert('Game over');
+					clearInterval(self.intervalId);
 					return;
 				};
 				if(this.coordX==this.mapWidth
@@ -72,6 +90,7 @@ document.addEventListener("DOMContentLoaded",function(){
 				) {
 					this.enable=false;
 					alert('Game over');
+					clearInterval(self.intervalId);
 					return;
 				};
 				if(this.coordX==this.foodX&&this.coordY==this.foodY){
