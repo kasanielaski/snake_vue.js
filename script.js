@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded",function(){
 				snakeBody:[{x:0,y:0},{x:1,y:0},{x:2,y:0},{x:3,y:0}],
 				foodX:Math.floor(Math.random()*39)+1,
 				foodY:Math.floor(Math.random()*29)+1,
-				score:0
+				score:0,
+				endGame:false
 			}
 		},
 		ready:function(){
@@ -53,9 +54,11 @@ document.addEventListener("DOMContentLoaded",function(){
 				this.dirX=1;
 				this.dirY=0;
 			},
-			start:function(){				
-				this.intervalId=null;
-				this.enable=true;
+			start:function(){
+				if(this.endGame==false){
+					this.intervalId=null;
+					this.enable=true;					
+				}
 			},
 			reset:function(){
 				this.enable=false;				
@@ -68,6 +71,7 @@ document.addEventListener("DOMContentLoaded",function(){
 				this.snakeBody=[{x:0,y:0},{x:1,y:0},{x:2,y:0},{x:3,y:0}];
 				this.foodX=Math.floor(Math.random()*39)+1;
 				this.foodY=Math.floor(Math.random()*29)+1;
+				this.endGame=false;
 			},
 			gameStart:function(){
 				var self=this;
@@ -81,6 +85,7 @@ document.addEventListener("DOMContentLoaded",function(){
 					this.enable=false;					
 					alert('Game over');
 					clearInterval(self.intervalId);
+					this.endGame=true;
 					return;
 				};
 				if(this.coordX==this.mapWidth
@@ -91,6 +96,7 @@ document.addEventListener("DOMContentLoaded",function(){
 					this.enable=false;
 					alert('Game over');
 					clearInterval(self.intervalId);
+					this.endGame=true;
 					return;
 				};
 				if(this.coordX==this.foodX&&this.coordY==this.foodY){
