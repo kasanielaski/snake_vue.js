@@ -3,28 +3,29 @@
 @back-color: #ECEAE0;
 @font-color: #383127;
 @radius: 3px;
-body{
+
+body {
 	font-size: 14pt;
 	background-color: @back-color;
 }
-.cell{
+.cell {
 	border: 1px solid gray;
 	position: absolute;
 	background-color: @back-color + #111;
 }
-.snake{
+.snake {
 	background-color: @snake-color;
 	border: 1px solid gray;
 	position: absolute;
 }
-.food{
+.food {
 	background-color: @food-color;
 	border: 1px solid gray;
 	position: absolute;
 }
-#btn{
+#btn {
 	position: relative;
-	button{
+	button {
 		font-size: 12pt;
 		border: 1px solid gray;
 		border-top-left-radius: @radius;
@@ -35,17 +36,17 @@ body{
 		width: 100px;
 		background-color: @back-color + #111;
 		color: @font-color;
-		}		
-	:focus{
+	}
+	:focus {
 		outline: none;
 	}
 }
-#score{
+#score {
 	position: relative;
 	color: @font-color;
 }
-#game{
+#game {
 	position: absolute;
 	top: 140px;
-	left: 550px
+	left: 550px;
 }
