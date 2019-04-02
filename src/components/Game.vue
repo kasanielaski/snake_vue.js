@@ -24,7 +24,34 @@ import Snake from './Snake.vue';
         Snake
     }
 })
-export default class Game extends Vue {}
+export default class Game extends Vue {
+    onKeyup(keyCode: number) {
+        switch (keyCode) {
+            case 37:
+                this.$store.dispatch('changeDirection', 'left');
+                break;
+            case 38:
+                this.$store.dispatch('changeDirection', 'up');
+                break;
+            case 39:
+                this.$store.dispatch('changeDirection', 'right');
+                break;
+            case 40:
+                this.$store.dispatch('changeDirection', 'down');
+                break;
+            default:
+                break;
+        }
+    }
+
+    created() {
+        window.addEventListener('keyup', ({ keyCode }: { keyCode: number }) =>
+            this.onKeyup(keyCode)
+        );
+
+        this.$store.dispatch('initGame');
+    }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
