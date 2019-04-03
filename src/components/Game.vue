@@ -1,6 +1,8 @@
 <template lang="pug">
 .game
-    Field.game__field
+    Field.game__field(
+        :config="getFieldConfig"
+    )
     Snake.game__snake
     Food.game__food
     .game__info
@@ -10,11 +12,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { Getter, namespace } from 'vuex-class';
 
 import Controls from './Controls.vue';
 import Field from './Field.vue';
 import Food from './Food.vue';
 import Snake from './Snake.vue';
+
+const root = namespace('game');
 
 @Component({
     components: {
@@ -25,6 +30,11 @@ import Snake from './Snake.vue';
     }
 })
 export default class Game extends Vue {
+    @root.Getter('getFieldConfig') getFieldConfig!: () => {
+        width: number;
+        height: number;
+    };
+
     onKeyup(keyCode: number) {
         switch (keyCode) {
             case 37:
@@ -48,8 +58,6 @@ export default class Game extends Vue {
         window.addEventListener('keyup', ({ keyCode }: { keyCode: number }) =>
             this.onKeyup(keyCode)
         );
-
-        this.$store.dispatch('initGame');
     }
 }
 </script>
