@@ -1,10 +1,10 @@
 import { MutationTree } from 'vuex';
 
-import { IGameState } from '@/types';
+import { IGameState, Coord } from '@/types';
 import { initialState } from './index';
 
 export const mutations: MutationTree<IGameState> = {
-    changeDirection(state, payload) {
+    changeDirection(state, payload: Coord) {
         state.direction = payload;
     },
 
