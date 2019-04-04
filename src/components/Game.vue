@@ -31,11 +31,11 @@ const game = namespace('game');
     }
 })
 export default class Game extends Vue {
-    @game.Getter('getFieldConfig') getFieldConfig!: () => {
+    @game.Getter('getFieldConfig') getFieldConfig!: {
         width: number;
         height: number;
     };
-    @game.Getter('getCellSize') getCellSize!: () => number;
+    @game.Getter('getCellSize') getCellSize!: number;
 
     onKeyup(keyCode: number) {
         switch (keyCode) {
