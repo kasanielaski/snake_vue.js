@@ -9,5 +9,9 @@ export const getters: GetterTree<IGameState, IRootState> = {
 
     getFieldConfig({ fieldConfig }) {
         return fieldConfig;
+    },
+
+    getCellSize({ cellSize }) {
+        return cellSize;
     }
-}
+};

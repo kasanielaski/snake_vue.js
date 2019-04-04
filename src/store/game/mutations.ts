@@ -8,10 +8,6 @@ export const mutations: MutationTree<IGameState> = {
         state.direction = payload;
     },
 
-    initGame(state, payload) {
-        state.field = payload;
-    },
-
     startGame(state) {
         state.intervalId = null;
         state.enable = true;

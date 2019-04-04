@@ -1,6 +1,14 @@
 <template lang="pug">
 .field
-    | field
+    .field__tile(
+        v-for="tile in fieldTiles"
+        :style=`{
+            'width': cellSize + 'px',
+            'height': cellSize + 'px',
+            'left': (tile.x * cellSize) + 'px',
+            'top': (tile.y * cellSize) + 'px'
+        }`
+    )
 </template>
 
 <script lang="ts">
@@ -14,17 +22,37 @@ export default class Field extends Vue {
         required: true,
         type: Object
     })
-    config!: Coord;
+    fieldConfig!: { width: number; height: number };
 
-    created() {
-        // eslint-disable-next-line
-        console.log(this.config);
+    @Prop({
+        required: true,
+        type: Number
+    })
+    cellSize!: number;
+
+    get fieldTiles(): Coord[] {
+        const { fieldConfig } = this;
+        const fieldTiles = [];
+
+        for (let y = 0; y < fieldConfig.height; y++) {
+            for (let x = 0; x < fieldConfig.width; x++) {
+                fieldTiles.push({
+                    x,
+                    y
+                });
+            }
+        }
+
+        return fieldTiles;
     }
 }
 </script>
 
 <style scoped lang="scss">
 .field {
-    background-color: aqua;
+    &__tile {
+        position: absolute;
+        border: 1px solid gray;
+    }
 }
 </style>

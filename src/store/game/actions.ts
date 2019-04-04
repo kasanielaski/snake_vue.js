@@ -52,20 +52,6 @@ export const actions: ActionTree<IGameState, IRootState> = {
         }
     },
 
-    initGame({ state, commit }) {
-        const fieldTiles = [];
-        for (let y = 0; y < state.fieldConfig.height; y++) {
-            for (let x = 0; x < state.fieldConfig.width; x++) {
-                fieldTiles.push({
-                    x,
-                    y
-                })
-            }
-        }
-
-        commit('initGame', fieldTiles);
-    },
-
     startGame({ state, commit }) {
         if (state.endGame === false) {
             commit('startGame');
@@ -75,4 +61,4 @@ export const actions: ActionTree<IGameState, IRootState> = {
     resetGame({ commit }) {
         commit('resetGame');
     }
-}
+};

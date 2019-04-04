@@ -1,7 +1,8 @@
 <template lang="pug">
 .game
     Field.game__field(
-        :config="getFieldConfig"
+        :fieldConfig="getFieldConfig",
+        :cellSize="getCellSize"
     )
     Snake.game__snake
     Food.game__food
@@ -19,7 +20,7 @@ import Field from './Field.vue';
 import Food from './Food.vue';
 import Snake from './Snake.vue';
 
-const root = namespace('game');
+const game = namespace('game');
 
 @Component({
     components: {
@@ -30,10 +31,11 @@ const root = namespace('game');
     }
 })
 export default class Game extends Vue {
-    @root.Getter('getFieldConfig') getFieldConfig!: () => {
+    @game.Getter('getFieldConfig') getFieldConfig!: () => {
         width: number;
         height: number;
     };
+    @game.Getter('getCellSize') getCellSize!: () => number;
 
     onKeyup(keyCode: number) {
         switch (keyCode) {
@@ -64,18 +66,7 @@ export default class Game extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-    margin: 40px 0 0;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-a {
-    color: #42b983;
+.game {
+    position: absolute;
 }
 </style>
