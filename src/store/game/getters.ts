@@ -1,17 +1,17 @@
 import { GetterTree } from 'vuex';
 
-import { IRootState, IGameState } from '@/types';
+import { IRootState, IGameState, Coord } from '@/types';
 
 export const getters: GetterTree<IGameState, IRootState> = {
-    getDirection({ direction }) {
+    getDirection({ direction }): Coord {
         return direction;
     },
 
-    getFieldConfig({ fieldConfig }) {
+    getFieldConfig({ fieldConfig }): { width: number; height: number } {
         return fieldConfig;
     },
 
-    getCellSize({ cellSize }) {
+    getCellSize({ cellSize }): number {
         return cellSize;
     }
 };
