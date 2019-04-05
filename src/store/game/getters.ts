@@ -13,5 +13,21 @@ export const getters: GetterTree<IGameState, IRootState> = {
 
     getCellSize({ cellSize }): number {
         return cellSize;
+    },
+
+    getSnakeHead({ snakeHead }): Coord {
+        return snakeHead;
+    },
+
+    getSnakeBody({ snakeBody }): Coord[] {
+        return snakeBody;
+    },
+
+    getFood({ food }): Coord {
+        return food;
+    },
+
+    getScore({ score }): number {
+        return score;
     }
 };

@@ -1,17 +1,32 @@
 <template lang="pug">
-.food
-    | food
+.food(
+    :style=`{
+        'width': cellSize + 'px',
+        'height': cellSize + 'px',
+        'left': (food.x * cellSize) + 'px',
+        'top': (food.y * cellSize) + 'px'
+    }`
+)
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Coord } from '../types';
 
 @Component
-export default class Food extends Vue {}
+export default class Food extends Vue {
+    @Prop({
+        required: true,
+        type: Object
+    })
+    food!: Coord;
+}
 </script>
 
 <style scoped lang="scss">
 .food {
+    position: absolute;
     background-color: seagreen;
+    border: 1px solid #c3c3c3;
 }
 </style>

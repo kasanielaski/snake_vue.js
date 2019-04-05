@@ -1,19 +1,38 @@
 <template lang="pug">
 .game
     Field.game__field(
-        :fieldConfig="getFieldConfig",
-        :cellSize="getCellSize"
+        v-for="tile in fieldTiles"
+        :style=`{
+            'width': cellSize + 'px',
+            'height': cellSize + 'px',
+            'left': (tile.x * cellSize) + 'px',
+            'top': (tile.y * cellSize) + 'px'
+        }`
     )
-    Snake.game__snake
-    Food.game__food
+    Snake.game__snake(
+        v-for="tile in snakeBody",
+        :style=`{
+            'width': cellSize + 'px',
+            'height': cellSize + 'px',
+            'left': (tile.x * cellSize) + 'px',
+            'top': (tile.y * cellSize) + 'px'
+        }`
+    )
+    Food.game__food(
+        :food="food",
+        :cellSize="cellSize"
+    )
     .game__info
         Controls.game__info-controls
         .game__info-score
+            | {{ score }}
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Getter, namespace } from 'vuex-class';
+
+import { Coord } from '../types';
 
 import Controls from './Controls.vue';
 import Field from './Field.vue';
@@ -31,11 +50,15 @@ const game = namespace('game');
     }
 })
 export default class Game extends Vue {
-    @game.Getter('getFieldConfig') getFieldConfig!: {
+    @game.Getter('getCellSize') cellSize!: number;
+    @game.Getter('getFieldConfig') fieldConfig!: {
         width: number;
         height: number;
     };
-    @game.Getter('getCellSize') getCellSize!: number;
+    @game.Getter('getSnakeHead') snakeHead!: Coord;
+    @game.Getter('getSnakeBody') snakeBody!: Coord[];
+    @game.Getter('getFood') food!: Coord;
+    @game.Getter('getScore') score!: number;
 
     onKeyup(keyCode: number) {
         switch (keyCode) {
@@ -54,6 +77,22 @@ export default class Game extends Vue {
             default:
                 break;
         }
+    }
+
+    get fieldTiles(): Coord[] {
+        const { fieldConfig } = this;
+        const fieldTiles = [];
+
+        for (let y = 0; y < fieldConfig.height; y++) {
+            for (let x = 0; x < fieldConfig.width; x++) {
+                fieldTiles.push({
+                    x,
+                    y
+                });
+            }
+        }
+
+        return fieldTiles;
     }
 
     created() {

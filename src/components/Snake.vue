@@ -1,6 +1,5 @@
 <template lang="pug">
 .snake
-    | snake
 </template>
 
 <script lang="ts">
@@ -12,6 +11,8 @@ export default class Snake extends Vue {}
 
 <style scoped lang="scss">
 .snake {
+    position: absolute;
     background-color: salmon;
+    border: 1px solid #c3c3c3;
 }
 </style>
