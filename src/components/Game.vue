@@ -65,7 +65,8 @@ export default class Game extends Vue {
     @game.Getter('getFood') food!: Coord;
     @game.Getter('getScore') score!: number;
     @game.Getter('getEnable') isEnable!: boolean;
-    @game.Getter('getTimer') intervalId!: number | null;
+
+    intervalId: null | number = null;
 
     onKeyup(keyCode: number) {
         switch (keyCode) {
@@ -109,8 +110,8 @@ export default class Game extends Vue {
         moveSnake();
 
         if (endGameConition) {
-            gameOver();
             this.intervalId = null;
+            gameOver();
             alert('game over');
         }
 
@@ -120,8 +121,8 @@ export default class Game extends Vue {
             snakeHead.x < 0 ||
             snakeHead.y < 0
         ) {
-            gameOver();
             this.intervalId = null;
+            gameOver();
             alert('game over');
         }
 

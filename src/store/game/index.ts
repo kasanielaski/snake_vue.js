@@ -15,7 +15,6 @@ export const initialState = {
     cellSize: 20,
     field: [],
     isEnable: false,
-    intervalId: null,
     fieldConfig: {
         width: 40,
         height: 30

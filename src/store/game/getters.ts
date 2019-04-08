@@ -31,10 +31,6 @@ export const getters: GetterTree<IGameState, IRootState> = {
         return score;
     },
 
-    getTimer({ intervalId }): number | null {
-        return intervalId;
-    },
-
     getEnable({ isEnable }): boolean {
         return isEnable;
     },

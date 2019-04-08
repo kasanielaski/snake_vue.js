@@ -28,7 +28,6 @@ export const mutations: MutationTree<IGameState> = {
     },
 
     setupGame(state) {
-        state.intervalId = null;
         state.isEnable = true;
     },
 
@@ -39,6 +38,5 @@ export const mutations: MutationTree<IGameState> = {
     gameOver(state) {
         state.isEnable = false;
         state.isEndGame = true;
-        state.intervalId = null;
     }
 };

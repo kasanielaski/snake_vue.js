@@ -11,7 +11,6 @@ export interface IGameState {
     cellSize: number;
     field: Coord[];
     isEnable: boolean;
-    intervalId: number | null;
     fieldConfig: {
         width: number;
         height: number;
