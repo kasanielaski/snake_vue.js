@@ -14,7 +14,7 @@ export const initialState = {
     },
     cellSize: 20,
     field: [],
-    enable: false,
+    isEnable: false,
     intervalId: null,
     fieldConfig: {
         width: 40,
@@ -29,10 +29,10 @@ export const initialState = {
         x: Math.floor(Math.random() * 39) + 1,
         y: Math.floor(Math.random() * 29) + 1
     },
-    endGame: false
+    isEndGame: false
 };
 
-export const state: IGameState = initialState;
+const state: IGameState = initialState;
 const namespaced: boolean = true;
 
 export const game: Module<IGameState, IRootState> = {

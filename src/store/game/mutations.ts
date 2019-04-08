@@ -8,12 +8,37 @@ export const mutations: MutationTree<IGameState> = {
         state.direction = payload;
     },
 
-    startGame(state) {
+    moveSnake(state, payload: any) {
+        state.snakeHead.x = payload.x;
+        state.snakeHead.y = payload.y;
+        state.snakeBody = payload.snakeBody;
+    },
+
+    enlagreSnake(state) {
+        state.snakeBody.push({
+            x: state.snakeHead.x,
+            y: state.snakeHead.y
+        });
+    },
+
+    addScore(state) {
+        state.score += 1;
+        state.food.x = Math.floor(Math.random() * 39) + 1;
+        state.food.y = Math.floor(Math.random() * 29) + 1;
+    },
+
+    setupGame(state) {
         state.intervalId = null;
-        state.enable = true;
+        state.isEnable = true;
     },
 
     resetGame(state) {
         state = initialState;
+    },
+
+    gameOver(state) {
+        state.isEnable = false;
+        state.isEndGame = true;
+        state.intervalId = null;
     }
 };

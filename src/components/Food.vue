@@ -20,6 +20,12 @@ export default class Food extends Vue {
         type: Object
     })
     food!: Coord;
+
+    @Prop({
+        required: true,
+        type: Number
+    })
+    cellSize!: number;
 }
 </script>
 

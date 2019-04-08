@@ -50,6 +50,11 @@ const game = namespace('game');
     }
 })
 export default class Game extends Vue {
+    @game.Action('moveSnake') moveSnake!: () => void;
+    @game.Action('addScore') addScore!: () => void;
+    @game.Action('gameOver') gameOver!: () => void;
+    @game.Action('enlagreSnake') enlagreSnake!: () => void;
+
     @game.Getter('getCellSize') cellSize!: number;
     @game.Getter('getFieldConfig') fieldConfig!: {
         width: number;
@@ -59,6 +64,8 @@ export default class Game extends Vue {
     @game.Getter('getSnakeBody') snakeBody!: Coord[];
     @game.Getter('getFood') food!: Coord;
     @game.Getter('getScore') score!: number;
+    @game.Getter('getEnable') isEnable!: boolean;
+    @game.Getter('getTimer') intervalId!: number | null;
 
     onKeyup(keyCode: number) {
         switch (keyCode) {
@@ -77,6 +84,52 @@ export default class Game extends Vue {
             default:
                 break;
         }
+    }
+
+    processGame() {
+        const {
+            isEnable,
+            moveSnake,
+            snakeHead,
+            snakeBody,
+            gameOver,
+            fieldConfig,
+            food,
+            addScore,
+            enlagreSnake
+        } = this;
+        const endGameConition = snakeBody.some(item => {
+            return item.x === snakeHead.x && item.y === snakeHead.y;
+        });
+
+        if (!isEnable) {
+            return;
+        }
+
+        moveSnake();
+
+        if (endGameConition) {
+            gameOver();
+            this.intervalId = null;
+            alert('game over');
+        }
+
+        if (
+            snakeHead.x === fieldConfig.width ||
+            snakeHead.y === fieldConfig.height ||
+            snakeHead.x < 0 ||
+            snakeHead.y < 0
+        ) {
+            gameOver();
+            this.intervalId = null;
+            alert('game over');
+        }
+
+        if (snakeHead.x === food.x && snakeHead.y === food.y) {
+            addScore();
+        }
+
+        enlagreSnake();
     }
 
     get fieldTiles(): Coord[] {
@@ -99,6 +152,7 @@ export default class Game extends Vue {
         window.addEventListener('keyup', ({ keyCode }: { keyCode: number }) =>
             this.onKeyup(keyCode)
         );
+        this.intervalId = setInterval(this.processGame, 100);
     }
 }
 </script>

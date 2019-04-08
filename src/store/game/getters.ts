@@ -29,5 +29,17 @@ export const getters: GetterTree<IGameState, IRootState> = {
 
     getScore({ score }): number {
         return score;
+    },
+
+    getTimer({ intervalId }): number | null {
+        return intervalId;
+    },
+
+    getEnable({ isEnable }): boolean {
+        return isEnable;
+    },
+
+    getEndGame({ isEndGame }): boolean {
+        return isEndGame;
     }
 };

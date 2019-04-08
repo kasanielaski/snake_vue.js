@@ -52,13 +52,35 @@ export const actions: ActionTree<IGameState, IRootState> = {
         }
     },
 
-    startGame({ state, commit }) {
-        if (state.endGame === false) {
-            commit('startGame');
+    moveSnake({ state: { snakeHead, snakeBody, direction }, commit }) {
+        const payload = {
+            x: snakeHead.x + direction.x,
+            y: snakeHead.y + direction.y,
+            snakeBody: snakeBody.slice(1)
+        };
+        commit('moveSnake', payload);
+    },
+
+    enlagreSnake ({ commit }) {
+        commit('enlagreSnake');
+    },
+
+    addScore({ commit }) {
+        commit('addScore');
+        commit('enlagreSnake');
+    },
+
+    setupGame({ state, commit }) {
+        if (state.isEndGame === false) {
+            commit('setupGame');
         }
     },
 
     resetGame({ commit }) {
         commit('resetGame');
+    },
+
+    gameOver({ commit }) {
+        commit('gameOver');
     }
 };

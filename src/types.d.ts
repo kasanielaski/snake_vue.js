@@ -10,7 +10,7 @@ export interface IGameState {
     direction: Coord;
     cellSize: number;
     field: Coord[];
-    enable: boolean;
+    isEnable: boolean;
     intervalId: number | null;
     fieldConfig: {
         width: number;
@@ -19,5 +19,5 @@ export interface IGameState {
     snakeHead: Coord;
     snakeBody: Coord[];
     food: Coord;
-    endGame: boolean;
+    isEndGame: boolean;
 }
