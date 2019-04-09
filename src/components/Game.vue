@@ -9,6 +9,7 @@
             'top': (tile.y * cellSize) + 'px'
         }`
     )
+
     Snake.game__snake(
         v-for="tile in snakeBody",
         :style=`{
@@ -18,12 +19,18 @@
             'top': (tile.y * cellSize) + 'px'
         }`
     )
+
     Food.game__food(
         :food="food",
         :cellSize="cellSize"
     )
+
     .game__info
-        Controls.game__info-controls
+        Controls.game__info-controls(
+            @setupGame="setupGame",
+            @resetGame="resetGame"
+        )
+
         .game__info-score
             | {{ score }}
 </template>
@@ -54,6 +61,8 @@ export default class Game extends Vue {
     @game.Action('addScore') addScore!: () => void;
     @game.Action('gameOver') gameOver!: () => void;
     @game.Action('enlagreSnake') enlagreSnake!: () => void;
+    @game.Action('setupGame') setupGame!: () => void;
+    @game.Action('resetGame') resetGame!: () => void;
 
     @game.Getter('getCellSize') cellSize!: number;
     @game.Getter('getFieldConfig') fieldConfig!: {

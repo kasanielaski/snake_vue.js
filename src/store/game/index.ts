@@ -13,7 +13,6 @@ export const initialState = {
         y: 0
     },
     cellSize: 20,
-    field: [],
     isEnable: false,
     fieldConfig: {
         width: 40,

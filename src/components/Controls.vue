@@ -1,7 +1,7 @@
 <template lang="pug">
 .controls
     button.controls__start(
-        @click="startGame"
+        @click="setupGame"
     )
         | start game
 
@@ -17,11 +17,11 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class Controls extends Vue {
     startGame() {
-        this.$store.dispatch('startGame');
+        this.$emit('setupGame');
     }
 
     resetGame() {
-        this.$store.dispatch('resetGame');
+        this.$emit('resetGame');
     }
 }
 </script>

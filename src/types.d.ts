@@ -9,7 +9,6 @@ export interface IGameState {
     score: number;
     direction: Coord;
     cellSize: number;
-    field: Coord[];
     isEnable: boolean;
     fieldConfig: {
         width: number;
