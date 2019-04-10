@@ -1,7 +1,7 @@
 <template lang="pug">
 .game
     Field.game__field(
-        v-for="tile in fieldTiles"
+        v-for="tile in fieldTiles",
         :style=`{
             'width': cellSize + 'px',
             'height': cellSize + 'px',

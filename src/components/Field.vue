@@ -12,7 +12,7 @@ export default class Field extends Vue {}
 <style scoped lang="scss">
 .field {
     position: absolute;
-    background-color: bisque;
+    background-color: #f5f2fa;
     border: 1px solid #c3c3c3;
 }
 </style>
