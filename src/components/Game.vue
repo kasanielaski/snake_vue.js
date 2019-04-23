@@ -2,6 +2,7 @@
 .game
     Field.game__field(
         v-for="tile in fieldTiles",
+        :key="`field_${tile.x}_${tile.y}`",
         :style=`{
             'width': cellSize + 'px',
             'height': cellSize + 'px',
@@ -12,6 +13,7 @@
 
     Snake.game__snake(
         v-for="tile in snakeBody",
+        :key="`snake_${tile.x}_${tile.y}`",
         :style=`{
             'width': cellSize + 'px',
             'height': cellSize + 'px',
