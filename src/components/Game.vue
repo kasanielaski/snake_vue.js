@@ -27,14 +27,19 @@
         :cellSize="cellSize"
     )
 
-    .game__info
+    .game__info(
+        :style=`{
+            'top': (cellSize * 30 + 10) + 'px',
+            'width': (cellSize * 40) + 'px'
+        }`
+    )
+        .game__info-score
+            | {{ score }}
+
         Controls.game__info-controls(
             @setupGame="setupGame",
             @resetGame="resetGame"
         )
-
-        .game__info-score
-            | {{ score }}
 </template>
 
 <script lang="ts">
@@ -173,5 +178,11 @@ export default class Game extends Vue {
 <style scoped lang="scss">
 .game {
     position: absolute;
+
+    &__info {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
 }
 </style>
